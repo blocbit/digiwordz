@@ -1,0 +1,19 @@
+<ng-container *ngIf="breadcrumbs$ | async as breadcrumbs">
+  <nav *ngIf="breadcrumbs.length" aria-label="breadcrumb">
+    <ol class="breadcrumb pr-3">
+      <li class="breadcrumb-item">
+        Digi
+      </li>
+      <li
+        *ngFor="let crumb of breadcrumbs"
+        class="breadcrumb-item"
+      >
+        <a *ngIf="crumb.link; else simple"
+          class="text-primary text-truncate"
+          [routerLink]="crumb.link"
+        >{{ resolveConnectionName(crumb.title) }}</a>
+        <ng-template #simple>{{ crumb.title }}</ng-template>
+      </li>
+    </ol>
+  </nav>
+</ng-container>

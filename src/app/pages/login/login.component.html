@@ -1,0 +1,31 @@
+<div class="d-flex justify-content-center">
+  <div class="card login-card border-0 mt-2 text-left">
+    <img class="card-img-top" src="/assets/brock-wegner-bpK7vTq2qn4-unsplash-res.jpeg" alt="thinking" />
+    <div class="card-body">
+      <div *ngIf="error$ | async as error" class="alert alert-danger">{{ error }}</div>
+      <h6 class="card-title"><p>Login and start sharing your memories and emotions. Make them viral and inspire the community. Manage your content.</p></h6>
+      <h6 class="card-subtitle mb-2 text-muted small">Fill the input with your secure passphrase.</h6>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="passphrase">Passphrase</label>
+            <div class="input-group">
+              <input [type]="showPassword ? 'text' : 'password'" class="form-control" formControlName="passphrase"/>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" (click)="showPassword = !showPassword">
+                  <fa-icon [icon]="!showPassword ? ['far', 'eye'] : ['far', 'eye-slash']"></fa-icon>
+                </button>
+              </div>
+            </div>
+        </div>
+        <div>
+            <p>
+              <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary btn-block">
+                  Login
+              </button>
+            </p>
+            <p class="text-center mb-0">Don't have an account? <a routerLink="/register">Register</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

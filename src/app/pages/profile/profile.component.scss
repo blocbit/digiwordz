@@ -1,0 +1,24 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+.profile-card {
+  width: 100%;
+  @include media-breakpoint-up(sm) {
+    width: 400px;
+  }
+}
+
+.card {
+  box-shadow: 0 1px 10px rgba(0,0,0,.09);
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.card-header {
+  background-color: rgba(0, 0, 0, 0.01);
+}
+
+.card-footer {
+  background-color: rgba(0, 0, 0, 0.01);
+}

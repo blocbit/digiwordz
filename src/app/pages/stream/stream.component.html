@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="memories d-flex flex-column">
+
+    <div class="accordion">
+      <div class="card my-3">
+        <div class="card-header">
+            <ng-container >
+              Start <fa-icon [icon]="['far', 'arrow-alt-circle-down']"></fa-icon>&nbsp; Restart <fa-icon [icon]="['fas', 'caret-down']"></fa-icon>
+            </ng-container>
+        </div>
+        <img class="card-img-top" src="/assets/docusign-L2iZFRPaH1M-unsplash.jpeg" alt="scrolling" />
+        <div class="card-body">
+          <textarea id="input-text" hidden>
+            <h6 class="card-title"><p>Hello Wordzmiths!</p></h6>
+            <h6 class="card-subtitle mb-2 text-muted">Here we are at the forfront of a new way to absorb the written word! Scroll the stream for latest public wordz 💨🧠</h6>
+          </textarea>
+          <span id="test-width" hidden></span>
+          <div id="wordz_container">
+            <div id="guide_top">
+                ――――――――――<span id="playpause"><fa-icon [icon]="['far', 'arrow-alt-circle-down']"></fa-icon><fa-icon [icon]="['far', 'pause-circle']"></fa-icon></span>―――――――――――
+                <span id="left-string"></span><span id="center-character"></span><span id="right-string"></span>
+            </div>
+            <div id="guide_bottom" class="mt-5">
+              <span id="reboot"><fa-icon [icon]="['fas', 'caret-down']"></fa-icon></span>―――――――――――――――――――――
+            </div>
+          </div>
+          <div class="controls">
+           <div class="current-wpm"><span id="wpm">150&nbsp;</span><span class="below">wpm</span></div>
+           <div class="slider" id="playpause">
+             <input id="wpm-slider" type="range" min="150" max="950" value="150" step="100">
+           </div>
+         </div>
+      </div>
+      <div class="card-footer">
+        <ng-container *ngIf="isAuthenticated$ | async; else notlogged">
+          <fa-icon [icon]="['fas', 'keyboard']"></fa-icon> Express yourself, share your <a routerLink="/memories">wordz</a>!
+        </ng-container>
+        <ng-template #notlogged>
+          Saving Superpowers. Let's <a [routerLink]="['/login']" [queryParams]="{redirect: 'memories'}">login</a>!
+        </ng-template>
+      </div>
+    </div>
+    <br>
+    <ng-container *ngIf="displayedMemories">
+      <div class="items" infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll()" >
+      <app-memory *ngFor="let memory of displayedMemories; trackBy:trackMemory" [memory]="memory" [simple]="true" class="mb-3"></app-memory>
+      </div>
+    </ng-container>
+    <button *ngIf="canShowMore()" type="button" class="mr-2 btn btn-sm btn-outline-primary" href="#" (click)="onScroll()">
+      Refresh ...
+    </button>
+  </div>
+</div>

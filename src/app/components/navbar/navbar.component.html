@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="/assets/skybrain-logo-icon.svg" height="30" alt="" loading="lazy">
+  </a>
+
+  <button class="navbar-toggler" type="button" (click)="opened = !opened">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse show" [ngClass]="{ show: opened }">
+    <ul class="nav navbar-nav mr-auto">
+      <li class="nav-item"></li>
+      <li class="nav-item"></li>
+    </ul>
+    <ul class="nav navbar-nav">
+      <ng-container *ngIf="publicKey">
+        <span #key class="navbar-text text-truncate w-25 d-inline-block ml-auto">
+          <a [routerLink]="['/connection', publicKey]">{{ resolveConnectionName(publicKey) }}</a>
+        </span>
+        <li class="nav-item">
+          <a title="copy public key" href="#" (click)="copyToClipboard(publicKey, $event)" class="nav-link">
+            <fa-icon [icon]="['fas', 'key']"></fa-icon>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a title="wordz" href="#/memories" class="nav-link">
+            <fa-icon [icon]="['far', 'keyboard']"></fa-icon>
+          </a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a title="profile" [routerLink]="['profile']" class="nav-link">
+            <fa-icon [icon]="['far', 'user']"></fa-icon>
+          </a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a title="sign-out" href="#" (click)="logout()" class="nav-link">
+            <fa-icon [icon]="['fas', 'sign-out-alt']"></fa-icon>
+          </a>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</nav>
+
+<app-breadcrumbs></app-breadcrumbs>

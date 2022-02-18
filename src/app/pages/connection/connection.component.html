@@ -1,0 +1,26 @@
+<div class="d-flex justify-content-center">
+  <div class="memories d-flex flex-column">
+    <div *ngIf="brainData" class="border p-3 bg-white rounded brain-profile">
+      <div class="d-flex justify-content-between">
+        <h5 *ngIf="brainData?.nickname" class="stroke mt-2">{{brainData?.nickname}}</h5>
+        <div class="d-flex mt-2">
+          <app-copy-key [publicKey]="publicKey"></app-copy-key>
+          <app-connect-me [publicKey]="publicKey"></app-connect-me>
+        </div>
+      </div>
+      <div *ngIf="brainData?.description" class="text-muted mt-4 mb-2">{{brainData?.description}}</div>
+    </div>
+    <app-brain-connections *ngIf="connectedUsers" [connectedUsers]="connectedUsers"></app-brain-connections>
+    <ng-container *ngIf="displayedMemories">
+      <div class="items" infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll()" >
+      <app-memory *ngFor="let memory of displayedMemories; trackBy:trackMemory" [memory]="memory" [ownerPublicKey]="publicKey" [simple]="true" class="mb-3"></app-memory>
+      </div>
+    </ng-container>
+    <button *ngIf="canShowMore()" type="button" class="mr-2 btn btn-sm btn-outline-primary" href="#" (click)="onScroll()">
+      Show more ...
+    </button>
+  </div>
+</div>
